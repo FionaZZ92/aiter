@@ -803,7 +803,8 @@ _paged_attention_kernel(const int* block_table_seq,
                             }
                         }
                     }
-                    __syncthreads();
+                    // no __syncthreads needed: shared_logits is read-only during
+                    // SV MFMA phase (written in softmax phase and synced at line 594)
                 }
                 // apply post Softmax V mfma v_scale
                 if constexpr(KV_DTYPE != vllm::Fp8KVCacheDataType::kAuto)
@@ -2152,7 +2153,8 @@ __inline__ __device__ void _paged_attention_kernel_EXPERIMENTAL(
                             }
                         }
                     }
-                    __syncthreads();
+                    // no __syncthreads needed: shared_logits is read-only during
+                    // SV MFMA phase (written in softmax phase and synced at line 594)
                 }
                 // apply post Softmax V mfma v_scale
                 if constexpr(KV_DTYPE != vllm::Fp8KVCacheDataType::kAuto)
