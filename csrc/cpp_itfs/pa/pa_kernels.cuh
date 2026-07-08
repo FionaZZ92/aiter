@@ -287,7 +287,9 @@ _paged_attention_kernel(const int* block_table_seq,
     }
 
     _B16x8 Vlocal[VTLOOP][VHELOOP][VTLANELOOP]; // this can be interpreted as B8x16 too
-    __shared__ unsigned char vlds_ptr[TOKENS_PER_WARP * n_thread_per_block * 16];
+    constexpr int V_LDS_PAD = 4;
+    constexpr int V_LDS_ROW_STRIDE = n_thread_per_block * 16 + V_LDS_PAD;
+    __shared__ unsigned char vlds_ptr[TOKENS_PER_WARP * V_LDS_ROW_STRIDE];
     static_assert(VBLOCKS_PER_LANE == VTLANELOOP,
                   "make sure we can keep un-shuffled data in Vlocal as well");
 
@@ -670,7 +672,7 @@ _paged_attention_kernel(const int* block_table_seq,
         }
     }
 
-    __syncthreads();
+    // __syncthreads(); // removed: shared_logits and vlds_ptr are independent buffers
 
     constexpr int ELEMS8_ELEMS4_RATIO  = 8 / 4;
     constexpr int ELEMS16_ELEMS8_RATIO = 16 / 8;
@@ -679,20 +681,20 @@ _paged_attention_kernel(const int* block_table_seq,
     {
         for(int vtoken_depth = 0; vtoken_depth < VTLOOP; vtoken_depth++)
         {
-            // 1. store data into LDS
+            // 1. store data into LDS (with padding per row)
             for(int vblock_depth = 0; vblock_depth < VBLOCKS_PER_LANE; vblock_depth++)
             {
                 const int vlds_col_idx = laneid % n_thread_per_block;
                 const int vlocal_token_idx =
                     vblock_depth * k_thread_per_block + threadIdx.x / n_thread_per_block;
                 *reinterpret_cast<_B16x8*>(vlds_ptr +
-                                           (/*row=*/vlocal_token_idx * n_thread_per_block +
-                                            /*col=*/vlds_col_idx) *
-                                               16) = Vlocal[vtoken_depth][vhe_depth][vblock_depth];
+                                           vlocal_token_idx * V_LDS_ROW_STRIDE +
+                                           vlds_col_idx * 16) =
+                    Vlocal[vtoken_depth][vhe_depth][vblock_depth];
             }
             __syncthreads();
 
-            // 2. load data from LDS (transposed), then do multification
+            // 2. load data from LDS (transposed)
             for(int vfetch_depth = 0; vfetch_depth < VTLANELOOP; vfetch_depth++)
             {
                 const int vlocal_head_elem = warpid * 16 + lane16id;
@@ -703,14 +705,13 @@ _paged_attention_kernel(const int* block_table_seq,
                 const int vlocal_token_idx =
                     rowid * VTOKENS_PER_LANE + vfetch_depth * CONTIGUOUS_KV_ELEMS_16B_LOAD;
 
-                // read data points individually and save them into array
                 cache_t elems[CONTIGUOUS_KV_ELEMS_16B_LOAD];
+                #pragma unroll
                 for(int d2 = 0; d2 < CONTIGUOUS_KV_ELEMS_16B_LOAD; ++d2)
                 {
                     const cache_t* fetched_elems = reinterpret_cast<const cache_t*>(
-                        vlds_ptr + (/*row=*/(vlocal_token_idx + d2) * n_thread_per_block +
-                                    /*col=*/vlds_col_idx) *
-                                       16);
+                        vlds_ptr + (vlocal_token_idx + d2) * V_LDS_ROW_STRIDE +
+                        vlds_col_idx * 16);
 
                     elems[d2] = fetched_elems[vlds_elem_idx];
                 }
@@ -1964,7 +1965,9 @@ __inline__ __device__ void _paged_attention_kernel_EXPERIMENTAL(
     }
 
     _B16x8 Vlocal[VTLOOP][VHELOOP][VTLANELOOP]; // this can be interpreted as B8x16 too
-    __shared__ unsigned char vlds_ptr[TOKENS_PER_WARP * n_thread_per_block * 16];
+    constexpr int V_LDS_PAD = 4;
+    constexpr int V_LDS_ROW_STRIDE = n_thread_per_block * 16 + V_LDS_PAD;
+    __shared__ unsigned char vlds_ptr[TOKENS_PER_WARP * V_LDS_ROW_STRIDE];
     static_assert(VBLOCKS_PER_LANE == VTLANELOOP,
                   "make sure we can keep un-shuffled data in Vlocal as well");
 
@@ -2010,20 +2013,20 @@ __inline__ __device__ void _paged_attention_kernel_EXPERIMENTAL(
     {
         for(int vtoken_depth = 0; vtoken_depth < VTLOOP; vtoken_depth++)
         {
-            // 1. store data into LDS
+            // 1. store data into LDS (with padding per row)
             for(int vblock_depth = 0; vblock_depth < VBLOCKS_PER_LANE; vblock_depth++)
             {
                 const int vlds_col_idx = laneid % n_thread_per_block;
                 const int vlocal_token_idx =
                     vblock_depth * k_thread_per_block + threadIdx.x / n_thread_per_block;
                 *reinterpret_cast<_B16x8*>(vlds_ptr +
-                                           (/*row=*/vlocal_token_idx * n_thread_per_block +
-                                            /*col=*/vlds_col_idx) *
-                                               16) = Vlocal[vtoken_depth][vhe_depth][vblock_depth];
+                                           vlocal_token_idx * V_LDS_ROW_STRIDE +
+                                           vlds_col_idx * 16) =
+                    Vlocal[vtoken_depth][vhe_depth][vblock_depth];
             }
             __syncthreads();
 
-            // 2. load data from LDS (transposed), then do multification
+            // 2. load data from LDS (transposed)
             for(int vfetch_depth = 0; vfetch_depth < VTLANELOOP; vfetch_depth++)
             {
                 const int vlocal_head_elem = warpid * 16 + lane16id;
@@ -2034,14 +2037,13 @@ __inline__ __device__ void _paged_attention_kernel_EXPERIMENTAL(
                 const int vlocal_token_idx =
                     rowid * VTOKENS_PER_LANE + vfetch_depth * CONTIGUOUS_KV_ELEMS_16B_LOAD;
 
-                // read data points individually and save them into array
                 cache_t elems[CONTIGUOUS_KV_ELEMS_16B_LOAD];
+                #pragma unroll
                 for(int d2 = 0; d2 < CONTIGUOUS_KV_ELEMS_16B_LOAD; ++d2)
                 {
                     const cache_t* fetched_elems = reinterpret_cast<const cache_t*>(
-                        vlds_ptr + (/*row=*/(vlocal_token_idx + d2) * n_thread_per_block +
-                                    /*col=*/vlds_col_idx) *
-                                       16);
+                        vlds_ptr + (vlocal_token_idx + d2) * V_LDS_ROW_STRIDE +
+                        vlds_col_idx * 16);
 
                     elems[d2] = fetched_elems[vlds_elem_idx];
                 }

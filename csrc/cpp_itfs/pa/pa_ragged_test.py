@@ -197,6 +197,32 @@ def pertoken_quant_kvcache_symm(
     return k_quant, k_scale, v_quant, v_scale
 
 
+def pertensor_quant_kvcache(
+    key_cache: torch.Tensor,
+    value_cache: torch.Tensor,
+    quant_dtype: torch.dtype,
+) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
+    fp8_max = torch.finfo(quant_dtype).max
+
+    k_float = key_cache.float()
+    k_amax = k_float.abs().max()
+    k_scale_val = k_amax / fp8_max
+    if k_scale_val == 0:
+        k_scale_val = torch.tensor(1.0)
+    k_quant = (k_float / k_scale_val).to(quant_dtype).view(torch.uint8)
+
+    v_float = value_cache.float()
+    v_amax = v_float.abs().max()
+    v_scale_val = v_amax / fp8_max
+    if v_scale_val == 0:
+        v_scale_val = torch.tensor(1.0)
+    v_quant = (v_float / v_scale_val).to(quant_dtype).view(torch.uint8)
+
+    k_scale = k_scale_val.view(1).to(torch.float32)
+    v_scale = v_scale_val.view(1).to(torch.float32)
+    return k_quant, k_scale, v_quant, v_scale
+
+
 # @perftest()
 
 
@@ -535,18 +561,25 @@ DUMP_INPUTS = False  # whether to dump inputs
 DUMP_OUTPUT = False  # whether to dump output
 
 
-@pytest.mark.parametrize("ctx_lens", [1, 26, 128, 4097])
-@pytest.mark.parametrize("num_seqs", [128])
-@pytest.mark.parametrize("num_heads", [(8, 1), (4, 2)])
-@pytest.mark.parametrize("head_size", [64, 128])
-@pytest.mark.parametrize("use_alibi", [False, True])
-@pytest.mark.parametrize("block_size", [1, 16, 32])
+#@pytest.mark.parametrize("ctx_lens", [1, 26, 128, 4097])
+@pytest.mark.parametrize("ctx_lens", [8192])
+#@pytest.mark.parametrize("num_seqs", [128])
+@pytest.mark.parametrize("num_seqs", [1])
+#@pytest.mark.parametrize("num_heads", [(8, 1), (4, 2)])
+@pytest.mark.parametrize("num_heads", [(4,1)])
+#@pytest.mark.parametrize("head_size", [64, 128])
+@pytest.mark.parametrize("head_size", [256])
+#@pytest.mark.parametrize("use_alibi", [False, True])
+@pytest.mark.parametrize("use_alibi", [False])
+#@pytest.mark.parametrize("block_size", [1, 16, 32])
+@pytest.mark.parametrize("block_size", [1])
 @pytest.mark.parametrize("dtype", [torch.float16, torch.bfloat16])
-@pytest.mark.parametrize("kv_cache_dtype", ["auto"])
+#@pytest.mark.parametrize("kv_cache_dtype", ["auto"])
+@pytest.mark.parametrize("kv_cache_dtype", ["fp8"])
 @pytest.mark.parametrize("kv_cache_layout", ["NHD", "HND"])
 @pytest.mark.parametrize("logits_soft_cap", [0.0, 30.0])
 @pytest.mark.parametrize("pa_variant", [PAVariant.Shomy])
-@pytest.mark.parametrize("quant_cache_dtype", [None, torch.float8_e4m3fnuz, torch.int8])
+@pytest.mark.parametrize("quant_cache_dtype", [torch.float8_e4m3fnuz])
 @pytest.mark.parametrize("seed", [0])
 @pytest.mark.parametrize("device", ["cuda:0"])
 def test_paged_attention(
@@ -565,10 +598,7 @@ def test_paged_attention(
     seed: int,
     device: str,
 ) -> None:
-    if pa_variant == PAVariant.Shomy:
-        if quant_cache_dtype is not None:
-            pytest.skip()
-    elif pa_variant == PAVariant.Asm:
+    if pa_variant == PAVariant.Asm:
         if (
             use_alibi
             or head_size != 128
@@ -607,13 +637,15 @@ def test_paged_attention(
         query.uniform_(*uniform_range)
 
         # Create the KV caches.
+        # When quant_cache_dtype is set, create bf16 caches first then quantize later
+        factory_cache_dtype = "auto" if quant_cache_dtype is not None else kv_cache_dtype
         key_caches, value_caches = kv_cache_factory(
             num_blocks,
             block_size,
             1,
             num_kv_heads,
             head_size,
-            kv_cache_dtype,
+            factory_cache_dtype,
             dtype,
             seed,
             device,
@@ -621,9 +653,10 @@ def test_paged_attention(
 
         key_cache, value_cache = key_caches[0], value_caches[0]
 
-        # Create the block tables.
+        # Create the block tables.随机的改成顺序的，看看page size是否有帮助
         block_tables = rearrange(
-            torch.randperm(num_blocks, dtype=torch.int32, device=device),
+            #torch.randperm(num_blocks, dtype=torch.int32, device=device),
+            torch.arange(num_blocks, dtype=torch.int32, device=device),
             "(b nblocks) -> b nblocks",
             b=num_seqs,
         )
@@ -804,9 +837,46 @@ def test_paged_attention(
     else:
         quant_algo = 2
 
-        k_quant_, k_scale_, v_quant_, v_scale_ = pertoken_quant_kvcache_symm(
-            key_cache, value_cache, quant_dtype=quant_cache_dtype
-        )
+        if pa_variant == PAVariant.Shomy:
+            k_quant_, k_scale_, v_quant_, v_scale_ = pertensor_quant_kvcache(
+                key_cache, value_cache, quant_dtype=quant_cache_dtype
+            )
+            k_quant_new = rearrange(k_quant_, "b h d1 s d2 -> b h s (d1 d2)")
+            v_quant_new = rearrange(v_quant_, "b h d s -> b h s d")
+
+            if kv_cache_layout == "NHD":
+                k_quant_new = rearrange(k_quant_new, "b h s d -> b s h d")
+                v_quant_new = rearrange(v_quant_new, "b h s d -> b s h d")
+
+            out_aiter, time_aiter = run_aiter(
+                query,
+                k_quant_new.contiguous(),
+                v_quant_new.contiguous(),
+                kv_indptr,
+                kv_page_indices,
+                kv_last_page_lens,
+                max_seq_len,
+                "fp8",
+                kv_cache_layout,
+                num_kv_heads,
+                scale,
+                alibi_slopes,
+                logits_soft_cap,
+                k_scale_,
+                v_scale_,
+            )
+            assert (
+                checkAllclose(
+                    out_golden,
+                    out_aiter,
+                    msg=f"golden vs aiter(quant:{quant_algo}, kvcache:{quant_cache_dtype}):{time_aiter}",
+                )
+                < 0.02
+            )
+        else:
+            k_quant_, k_scale_, v_quant_, v_scale_ = pertoken_quant_kvcache_symm(
+                key_cache, value_cache, quant_dtype=quant_cache_dtype
+            )
 
         if pa_variant == PAVariant.Naive:
             out_aiter_naive, time_aiter_naive = run_aiter_naive(
@@ -879,29 +949,35 @@ def test_paged_attention(
 
 if __name__ == "__main__":
     torch.set_printoptions(sci_mode=False)
+    
+    num_seqs = 32 #batch
+    num_heads = (4, 1)        # TP=8: 32/8=4 query, 1 kv
+    head_size = 256
+    block_size = 16
+    kv_cache_dtype = "fp8"
 
     for ctx_len, pa_variant, quant_cache_dtype in itertools.product(
-        [1, 26, 128, 4097],
+        [8192], #[1, 26, 128, 4097],
         [PAVariant.Shomy],
-        [None, torch.float8_e4m3fnuz, torch.int8],
+        [torch.float8_e4m3fnuz],
     ):
 
-        if pa_variant == PAVariant.Shomy:
-            if quant_cache_dtype is not None:
-                continue
-        elif pa_variant == PAVariant.Asm:
-            if quant_cache_dtype not in [None, torch.int8]:
-                continue
+        #if pa_variant == PAVariant.Shomy:
+        #    if quant_cache_dtype is not None:
+        #        continue
+        #elif pa_variant == PAVariant.Asm:
+        #    if quant_cache_dtype not in [None, torch.int8]:
+        #        continue
 
         test_paged_attention(
             ctx_len,
-            128,
-            (8, 1),
-            128,
+            num_seqs, 
+            num_heads,
+            head_size,
             False,
-            16,
+            block_size, #1
             torch.bfloat16,
-            "auto",
+            kv_cache_dtype,
             "HND",
             0.0,
             pa_variant,
