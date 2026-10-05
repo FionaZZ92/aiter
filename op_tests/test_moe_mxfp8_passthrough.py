@@ -462,18 +462,82 @@ def _mimo_opus_metadata(tokens, output_dtype):
 
 
 @pytest.mark.parametrize(
-    ("tokens", "sort_block_m", "stage1_schedule"),
+    (
+        "tokens",
+        "fp8_sort_block_m",
+        "fp8_stage1_schedule",
+        "bf16_sort_block_m",
+        "bf16_stage1_schedule",
+        "bf16_route_reduce",
+    ),
     [
-        (8192, 64, "t64x256x256_w4_bnt0_gui_xcd4_fp8"),
-        (16384, 128, "t128x256x256_bnt0_gui_xcd4_ph8_fp8"),
-        (32768, 64, "t64x256x256_w2_bnt0_gui_xcd4_fp8"),
-        (65536, 64, "t64x256x256_w2_bnt0_gui_xcd4_fp8"),
+        (
+            2048,
+            64,
+            "t64x256x256_w4_gui_fp8",
+            64,
+            "t64x128x256_w3_gui_fp8",
+            "rbn3584",
+        ),
+        (
+            4096,
+            128,
+            "t128x256x256_w4_gui_fp8",
+            64,
+            "t64x256x256_w2_bnt0_gui_xcd4_fp8",
+            "rbn3584",
+        ),
+        (
+            8192,
+            64,
+            "t64x256x256_w4_bnt0_gui_xcd4_fp8",
+            64,
+            "t64x256x256_w4_bnt0_gui_xcd4_fp8",
+            "rbn3584",
+        ),
+        (
+            16384,
+            128,
+            "t128x256x256_bnt0_gui_xcd4_ph8_fp8",
+            64,
+            "t64x256x256_w4_bnt0_gui_xcd4_fp8",
+            "rbn6144",
+        ),
+        (
+            32768,
+            64,
+            "t64x256x256_w2_bnt0_gui_xcd4_fp8",
+            64,
+            "t64x256x256_w2_bnt0_gui_xcd4_fp8",
+            "rbn6144",
+        ),
+        (
+            65536,
+            128,
+            "t128x256x256_bnt0_gui_xcd4_ph8_fp8",
+            64,
+            "t64x256x256_w4_bnt0_gui_xcd4_fp8",
+            "rbn6144",
+        ),
+        (
+            131072,
+            128,
+            "t128x256x256_bnt0_gui_xcd4_ph8_fp8",
+            64,
+            "t64x256x256_w2_bnt0_gui_xcd4_fp8",
+            "rbn6144",
+        ),
     ],
 )
 def test_mimo_opus_stage2_output_dtype_selects_matching_kernel(
-    tokens, sort_block_m, stage1_schedule
+    tokens,
+    fp8_sort_block_m,
+    fp8_stage1_schedule,
+    bf16_sort_block_m,
+    bf16_stage1_schedule,
+    bf16_route_reduce,
 ):
-    """The public config switch must cover every MiMo production token tier."""
+    """Each route dtype must select its own tuned MiMo row."""
 
     get_2stage_cfgs.cache_clear()
     auto = _mimo_opus_metadata(tokens, "auto")
@@ -486,12 +550,17 @@ def test_mimo_opus_stage2_output_dtype_selects_matching_kernel(
 
     assert (
         auto.stage1.keywords["kernelName"]
-        == f"flydsl_moe1_afp8_wfp4_bf16_{stage1_schedule}"
+        == f"flydsl_moe1_afp8_wfp4_bf16_{fp8_stage1_schedule}"
     )
-    suffix = f"t64x256x256_sbm{sort_block_m}_rbn6144_xw8"
+    assert (
+        bf16.stage1.keywords["kernelName"]
+        == f"flydsl_moe1_afp8_wfp4_bf16_{bf16_stage1_schedule}"
+    )
+    fp8_suffix = f"t64x256x256_sbm{fp8_sort_block_m}_rbn6144_xw8"
+    bf16_suffix = f"t64x256x256_sbm{bf16_sort_block_m}_{bf16_route_reduce}"
     assert auto_name == fp8_name
-    assert auto_name == f"opus_moe2_layout_afp8_wfp4_fp8_{suffix}"
-    assert bf16_name == f"opus_moe2_layout_afp8_wfp4_bf16_{suffix}"
+    assert auto_name == f"opus_moe2_layout_afp8_wfp4_fp8_{fp8_suffix}"
+    assert bf16_name == f"opus_moe2_afp8_wfp4_bf16_{bf16_suffix}"
 
 
 def test_opus_stage2_output_dtype_does_not_reject_non_opus_decode_config():

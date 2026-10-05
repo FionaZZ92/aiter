@@ -74,6 +74,9 @@ def is_flydsl_available() -> bool:
 
 BLOCK_SIZE_M = 32
 _OPUS_STAGE2_OUTPUT_DTYPES = ("auto", "fp8", "bf16")
+_OPUS_STAGE2_BF16_CONFIG_TAG = "opus_stage2_bf16"
+_OPUS_STAGE2_CONFIG_VARIANT_COL = "_opus_stage2_config_variant"
+_OPUS_STAGE2_CONFIG_VARIANT_ANY = "any"
 
 _USE_CK_MOE_SORTING = os.environ.get("AITER_USE_CK_MOE_SORTING", "0") == "1"
 _USE_FLYDSL_MOE_SORTING = os.environ.get("AITER_USE_FLYDSL_MOE_SORTING", "0") == "1"
@@ -166,6 +169,28 @@ def _select_opus_stage2_output_dtype(cfg, output_dtype: str):
     selected_cfg = dict(cfg)
     selected_cfg["kernelName2"] = selected_kernel_name
     return selected_cfg
+
+
+def _opus_stage2_config_variant(kernel_name, tag="") -> str:
+    """Classify tuned rows without changing the public FMoE shape key.
+
+    ``_tag`` lets one model CSV carry separately tuned FP8- and BF16-route
+    rows for the same logical MoE shape. Untagged rows retain their historical
+    role as the ``auto`` default; non-route-output kernels apply to either
+    requested route-buffer dtype.
+    """
+
+    tag = str(tag or "").strip()
+    if tag == _OPUS_STAGE2_BF16_CONFIG_TAG:
+        return "bf16"
+
+    instance = _opus_a8w4.opus_a8w4_stage2_instance_from_name(
+        str(kernel_name or "").strip()
+    )
+    if instance is None or not instance.route_out:
+        return _OPUS_STAGE2_CONFIG_VARIANT_ANY
+    output_dtype = "fp8" if instance.route_out_fp8 else "bf16"
+    return f"default_{output_dtype}"
 
 
 # FLAT 1stage asm kernels (manifest flat=1) ingest raw topk_ids /
@@ -2829,6 +2854,7 @@ def get_2stage_cfgs(
         _INDEX_COLS.extend(
             ["shared_expert_id", "hidden_pad", "intermediate_pad", "gate_mode"]
         )
+    _INDEX_COLS.append(_OPUS_STAGE2_CONFIG_VARIANT_COL)
 
     def _ensure_gfx_column(df):
         """Guarantee a usable `gfx` column, migrating legacy cu_num-only CSVs."""
@@ -2851,6 +2877,17 @@ def get_2stage_cfgs(
         df = _ensure_gfx_column(df)
         if "_tag" in df.columns:
             df = df[df["_tag"].fillna("") != "flydsl_fallback"]
+        tags = df["_tag"].fillna("") if "_tag" in df.columns else [""] * len(df)
+        kernel_names = (
+            df["kernelName2"].fillna("")
+            if "kernelName2" in df.columns
+            else [""] * len(df)
+        )
+        df = df.copy()
+        df[_OPUS_STAGE2_CONFIG_VARIANT_COL] = [
+            _opus_stage2_config_variant(kernel_name, tag)
+            for kernel_name, tag in zip(kernel_names, tags)
+        ]
 
         # Primary dict: keep original act_type for exact-match lookup.
         df_primary = df.copy()
@@ -2977,21 +3014,56 @@ def get_2stage_cfgs(
             return None
         primary, fallback = c2s
         lookup_keys = keys[:7] + (str(activation),) + keys[8:]
-        result = primary.get(lookup_keys, None)
-        if result is None and config_file is None:
-            result = fallback.get(keys_disabled, None)
-        # Tier fallback: if current tier not found, try smaller tiers in descending order
-        if result is None and config_file is None and token > _PADDED_M_TIERS[0]:
-            tier_idx = _PADDED_M_TIERS.index(token) if token in _PADDED_M_TIERS else -1
+
+        if opus_stage2_output_dtype == "auto":
+            preferred_variants = ("default_fp8", "default_bf16", "any")
+            alternate_variants = ()
+        elif opus_stage2_output_dtype == "fp8":
+            preferred_variants = ("default_fp8", "fp8", "any")
+            alternate_variants = ("bf16", "default_bf16")
+        else:
+            preferred_variants = ("bf16", "default_bf16", "any")
+            alternate_variants = ("default_fp8", "fp8")
+
+        def _lookup_variants(primary_keys, fallback_keys, variants):
+            for variant in variants:
+                result = primary.get(primary_keys + (variant,), None)
+                if result is None and config_file is None:
+                    result = fallback.get(fallback_keys + (variant,), None)
+                if result is not None:
+                    return result
+            return None
+
+        result = _lookup_variants(lookup_keys, keys_disabled, preferred_variants)
+        fallback_keys = []
+        if config_file is None and token > _PADDED_M_TIERS[0]:
+            tier_idx = (
+                _PADDED_M_TIERS.index(token) if token in _PADDED_M_TIERS else -1
+            )
             for fallback_tier in reversed(_PADDED_M_TIERS[:tier_idx]):
                 # keys layout: (gfx, cu_num, token, ...); replace token (idx 2).
                 keys_fb = lookup_keys[:2] + (fallback_tier,) + lookup_keys[3:]
                 keys_fb_disabled = (
                     keys_disabled[:2] + (fallback_tier,) + keys_disabled[3:]
                 )
-                result = primary.get(keys_fb, None)
+                fallback_keys.append((keys_fb, keys_fb_disabled))
                 if result is None:
-                    result = fallback.get(keys_fb_disabled, None)
+                    result = _lookup_variants(
+                        keys_fb, keys_fb_disabled, preferred_variants
+                    )
+        if result is not None:
+            return result
+
+        # If the requested representation has no tuned row, reuse the other
+        # representation only after exhausting exact and lower-tier matches.
+        # _select_opus_stage2_output_dtype() below converts it when a compatible
+        # registered kernel exists.
+        result = _lookup_variants(lookup_keys, keys_disabled, alternate_variants)
+        if result is None:
+            for keys_fb, keys_fb_disabled in fallback_keys:
+                result = _lookup_variants(
+                    keys_fb, keys_fb_disabled, alternate_variants
+                )
                 if result is not None:
                     break
         return result
