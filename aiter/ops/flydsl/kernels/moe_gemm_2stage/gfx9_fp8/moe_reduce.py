@@ -16,12 +16,12 @@ from .common import _ptr
 
 
 @functools.cache
-def sorted_sum(TOPK, N):
-    assert N % 256 == 0
+def _sorted_sum_launcher(TOPK, N, output_padding_bytes, _dtype):
     num_threads = 64 if N % 512 == 0 else 32
 
     @flyc.kernel(known_block_size=[num_threads, 1, 1])
     def sorted_sum_kernel(loc_ids: fx.Pointer, A: fx.Pointer, B: fx.Pointer):
+        input_row_stride = N + output_padding_bytes // (A.dtype.width // 8)
         batch = fx.block_idx.x
         loc_ids += batch * TOPK
         token_locs = [loc_ids[topk] for topk in fx.range_constexpr(TOPK)]
@@ -39,7 +39,8 @@ def sorted_sum(TOPK, N):
         )
 
         token_ptrs = [
-            (A + fx.Int64(token_locs[topk]) * N) for topk in fx.range_constexpr(TOPK)
+            (A + fx.Int64(token_locs[topk]) * input_row_stride)
+            for topk in fx.range_constexpr(TOPK)
         ]
 
         def load_atom(topk_id, off):
@@ -78,12 +79,20 @@ def sorted_sum(TOPK, N):
             grid=(batch_size, 1, 1), block=(num_threads, 1, 1), stream=stream
         )
 
+    return launch
+
+
+@functools.cache
+def sorted_sum(TOPK, N, output_padding_bytes=0):
+    assert N % 256 == 0
+    assert output_padding_bytes in (0, 32, 64, 128)
+
     def callable(
         loc_ids: torch.Tensor, A: torch.Tensor, B: torch.Tensor, batch_size: int
     ):
         stream = torch.cuda.current_stream()
         _run_compiled(
-            launch,
+            _sorted_sum_launcher(TOPK, N, output_padding_bytes, A.dtype),
             _ptr(loc_ids),
             _ptr(A),
             _ptr(B),
