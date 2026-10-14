@@ -305,14 +305,16 @@ inline void opus_moe_stage2_reduce_token_slot_route_output_launch_variant_gfx950
     }
 }
 
-// Dispatch on block_n with the topk known at compile time (TOPK).
+// Dispatch on block_n and optional block_threads with TOPK known at compile time.
 template<int TOPK>
 inline void opus_moe_stage2_reduce_token_slot_route_output_dispatch_block_n_gfx950(
     const opus_moe_stage2_route_reduce_kargs& kargs,
     dim3 grid,
     hipStream_t stream,
-    int block_n)
+    int block_n,
+    int block_threads)
 {
+    GENERATE_OPUS_MOE_STAGE2_A8W4_ROUTE_REDUCE_DISPATCH(TOPK)
     switch(block_n)
     {
     case kOpusMoeStage2RouteOutputReduceBf16BlockN:
@@ -327,7 +329,6 @@ inline void opus_moe_stage2_reduce_token_slot_route_output_dispatch_block_n_gfx9
             kOpusMoeStage2RouteOutputReduceDefaultThreads,
             TOPK>(kargs, grid, stream);
         break;
-    GENERATE_OPUS_MOE_STAGE2_A8W4_ROUTE_REDUCE_DISPATCH_CASES(TOPK)
     default:
         AITER_CHECK(false,
                     "unsupported Opus MoE route-output reduce block_n=",
@@ -338,7 +339,8 @@ inline void opus_moe_stage2_reduce_token_slot_route_output_dispatch_block_n_gfx9
 inline void opus_moe_stage2_reduce_token_slot_route_output_launch_gfx950(
     const opus_moe_stage2_route_reduce_kargs& kargs,
     hipStream_t stream,
-    int requested_block_n)
+    int requested_block_n,
+    int requested_block_threads = 0)
 {
     const int block_n = requested_block_n > 0
                             ? requested_block_n
@@ -351,19 +353,19 @@ inline void opus_moe_stage2_reduce_token_slot_route_output_launch_gfx950(
     {
     case 4:
         opus_moe_stage2_reduce_token_slot_route_output_dispatch_block_n_gfx950<4>(
-            kargs, grid, stream, block_n);
+            kargs, grid, stream, block_n, requested_block_threads);
         break;
     case 6:
         opus_moe_stage2_reduce_token_slot_route_output_dispatch_block_n_gfx950<6>(
-            kargs, grid, stream, block_n);
+            kargs, grid, stream, block_n, requested_block_threads);
         break;
     case 8:
         opus_moe_stage2_reduce_token_slot_route_output_dispatch_block_n_gfx950<8>(
-            kargs, grid, stream, block_n);
+            kargs, grid, stream, block_n, requested_block_threads);
         break;
     default:
         opus_moe_stage2_reduce_token_slot_route_output_dispatch_block_n_gfx950<0>(
-            kargs, grid, stream, block_n);
+            kargs, grid, stream, block_n, requested_block_threads);
         break;
     }
 }

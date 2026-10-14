@@ -221,7 +221,7 @@ def _emit_stage2_a8w4_meta_header() -> str:
             ]
         )
     lines.append(
-        "\n#define GENERATE_OPUS_MOE_STAGE2_A8W4_ROUTE_REDUCE_DISPATCH_CASES(TOPK) \\\n"
+        "\n#define GENERATE_OPUS_MOE_STAGE2_A8W4_ROUTE_REDUCE_DISPATCH(TOPK) \\\n"
     )
     for idx, inst in enumerate(OPUS_A8W4_ROUTE_REDUCE_INSTANCES):
         suffix = _cpp_name_suffix(inst.name)
@@ -229,11 +229,13 @@ def _emit_stage2_a8w4_meta_header() -> str:
             " \\\n" if idx != len(OPUS_A8W4_ROUTE_REDUCE_INSTANCES) - 1 else "\n"
         )
         lines.append(
-            f"    case opus_moe::kStage2A8W4RouteReduce{suffix}BlockN: "
+            f"    if(block_n == opus_moe::kStage2A8W4RouteReduce{suffix}BlockN "
+            f"&& (block_threads == 0 || block_threads == "
+            f"opus_moe::kStage2A8W4RouteReduce{suffix}Threads)) {{ "
             "opus_moe_stage2_reduce_token_slot_route_output_launch_variant_gfx950<"
             f"opus_moe::kStage2A8W4RouteReduce{suffix}BlockN, "
             f"opus_moe::kStage2A8W4RouteReduce{suffix}Threads, "
-            "TOPK>(kargs, grid, stream); break;" + line_suffix
+            "TOPK>(kargs, grid, stream); return; }" + line_suffix
         )
     lines.append("\n")
 

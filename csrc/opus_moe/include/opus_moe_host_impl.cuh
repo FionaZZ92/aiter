@@ -564,7 +564,8 @@ void opus_moe_stage2_a8w4_decode_fwd(
 void opus_moe_stage2_reduce_token_slot_route_output_fwd(aiter_tensor_t& route_out,
                                                         aiter_tensor_t& out,
                                                         int topk,
-                                                        int block_n)
+                                                        int block_n,
+                                                        int block_threads)
 {
     // fp8 route_out is uint8-packed; bf16 route_out is bf16. Derive mode from dtype
     // (no OPUS_ROUTE_FP8 env): keeps reduce in sync with the decode kid that produced it.
@@ -634,7 +635,7 @@ void opus_moe_stage2_reduce_token_slot_route_output_fwd(aiter_tensor_t& route_ou
     HipDeviceGuard guard(route_out.device_id);
     const hipStream_t stream = aiter::getCurrentHIPStream();
     opus_moe_stage2_reduce_token_slot_route_output_launch_gfx950(
-        kargs, stream, block_n);
+        kargs, stream, block_n, block_threads);
     HIP_CALL_LAUNCH(hipGetLastError());
 }
 

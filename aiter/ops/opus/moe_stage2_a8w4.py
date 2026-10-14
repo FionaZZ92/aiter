@@ -46,6 +46,10 @@ class OpusA8W4LaunchConfig:
         return self.instance.reduce_block_n
 
     @property
+    def reduce_threads(self) -> int | None:
+        return self.instance.reduce_threads
+
+    @property
     def route_out(self) -> bool:
         return self.instance.route_out
 
@@ -130,6 +134,7 @@ def _gen_opus_moe_stage2_reduce_fake_tensors(
     out: Tensor,
     topk: int,
     block_n: int,
+    block_threads: int,
 ) -> Tensor:
     return out
 
@@ -169,6 +174,7 @@ def _opus_moe_stage2_reduce_token_slot_route_output_fwd_raw(
     out: Tensor,
     topk: int,
     block_n: int,
+    block_threads: int,
 ) -> Tensor: ...
 
 
@@ -291,7 +297,9 @@ def opus_moe_stage2_reduce_token_slot_route_output_fwd(
     *,
     topk: int | None = None,
     block_n: int | None = None,
+    block_threads: int | None = None,
 ) -> Tensor:
+    reduce_threads = 0 if block_threads is None else int(block_threads)
     if route_out.dtype == torch.uint8:
         # MXFP8 route_out: uint8 [rows, md + md/8]; topk required, out [rows/topk, md].
         # fp8 is inferred from the uint8 dtype (no OPUS_ROUTE_FP8 env); C++ matches.
@@ -332,7 +340,7 @@ def opus_moe_stage2_reduce_token_slot_route_output_fwd(
             )
         bn = _OPUS_MOE_STAGE2_ROUTE_REDUCE_AUTO_BLOCK_N if block_n is None else block_n
         _opus_moe_stage2_reduce_token_slot_route_output_fwd_raw(
-            _contiguous(route_out), out, int(topk), int(bn)
+            _contiguous(route_out), out, int(topk), int(bn), reduce_threads
         )
         return out
     if route_out.dtype != torch.bfloat16:
@@ -375,6 +383,7 @@ def opus_moe_stage2_reduce_token_slot_route_output_fwd(
         out,
         int(topk),
         int(block_n),
+        reduce_threads,
     )
     return out
 
@@ -601,6 +610,7 @@ def opus_moe_stage2_a8w4_fwd(
         out=out,
         topk=int(topk),
         block_n=launch.reduce_block_n,
+        block_threads=launch.reduce_threads,
     )
 
 

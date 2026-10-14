@@ -104,6 +104,11 @@ class OpusA8W4Stage2Instance:
         route_reduce = opus_a8w4_route_reduce(self.route_reduce)
         return None if route_reduce is None else route_reduce.block_n
 
+    @property
+    def reduce_threads(self) -> int | None:
+        route_reduce = opus_a8w4_route_reduce(self.route_reduce)
+        return None if route_reduce is None else route_reduce.threads
+
     def tuner_params(self) -> dict[str, object]:
         route_reduce = opus_a8w4_route_reduce(self.route_reduce)
         params = {
@@ -117,6 +122,7 @@ class OpusA8W4Stage2Instance:
         if route_reduce is not None:
             params["route_reduce"] = route_reduce.name
             params["reduce_block_n"] = route_reduce.block_n
+            params["reduce_threads"] = route_reduce.threads
         return params
 
     def supports_tuner_token(self, token: int | None) -> bool:

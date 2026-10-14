@@ -26,7 +26,8 @@ void opus_moe_stage2_a8w4_decode_fwd(
 void opus_moe_stage2_reduce_token_slot_route_output_fwd(aiter_tensor_t& route_out,
                                                         aiter_tensor_t& out,
                                                         int topk,
-                                                        int block_n);
+                                                        int block_n,
+                                                        int block_threads);
 
 void opus_moe_stage1_a8w4_fwd(
     aiter_tensor_t& hidden_states,

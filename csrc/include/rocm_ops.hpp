@@ -381,7 +381,8 @@ namespace py = pybind11;
           py::arg("route_out"),                                                     \
           py::arg("out"),                                                           \
           py::arg("topk"),                                                          \
-          py::arg("block_n") = -1);                                                  \
+          py::arg("block_n") = -1,                                                  \
+          py::arg("block_threads") = 0);                                             \
     m.def("opus_moe_stage1_a8w4_fwd",                                                \
           &opus_moe_stage1_a8w4_fwd,                                                 \
           "A8W4 Opus MoE stage1 path",                                               \

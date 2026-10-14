@@ -660,12 +660,16 @@ def test_opus_stage2_route_output_formats_match_torch():
     kernel_names = {
         "fp8": "opus_moe2_afp8_wfp4_fp8_t64x256x256_sbm64_rbn6144_xw8",
         "bf16": "opus_moe2_afp8_wfp4_bf16_t64x256x256_sbm64_rbn6144_xw8",
+        "bf16_384": "opus_moe2_afp8_wfp4_bf16_t64x256x256_sbm64_rbn6144",
     }
     from csrc.opus_moe.opus_moe_common import opus_a8w4_stage2_instance_from_name
 
     for output_dtype, kernel_name in kernel_names.items():
         instance = opus_a8w4_stage2_instance_from_name(kernel_name)
         assert instance is not None
+        launch = stage2_launch_config(instance.kid)
+        assert launch.reduce_block_n == 6144
+        assert launch.reduce_threads == (384 if output_dtype == "bf16_384" else 768)
         outputs[output_dtype] = opus_moe_stage2_a8w4_fwd(
             inter_q,
             w2_shuffled,
@@ -675,7 +679,7 @@ def test_opus_stage2_route_output_formats_match_torch():
             sorted_weights,
             sorted_expert_ids,
             num_valid_ids,
-            launch=stage2_launch_config(instance.kid),
+            launch=launch,
             inter_dim_pad=0,
             token_num=tokens,
             topk=topk,
