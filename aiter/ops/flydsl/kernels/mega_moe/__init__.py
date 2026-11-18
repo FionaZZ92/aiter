@@ -10,6 +10,7 @@ _LAZY = {
     "MegaMoEBundlePlan": "mega_moe_config",
     "MegaMoEConfig": "mega_moe_config",
     "MegaMoEV2": "mega_moe_v2",
+    "SmallMRuntime": "mega_moe_small_m",
     "Stage1Config": "mega_moe_config",
     "Stage2Config": "mega_moe_config",
     "Stage2BundleKey": "mega_moe_config",
