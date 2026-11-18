@@ -1,0 +1,102 @@
+{
+  "source": "actual rank-2 runtime artifacts from current FlyDSL0.3.2 benchmark cache",
+  "source_commit": "28e6b92136f72b7b3617ea720d1a0f27027e1cea",
+  "groups": [
+    {
+      "kernel": "megamoe_small_stage1_t32x128x256_w4_gm1_dcu64_pw1ma0sw1aa0_tr1wpe1_bnt3_fused256_256_4096_256_decode4102",
+      "artifacts": 8,
+      "vgpr_count": {
+        "min": 388,
+        "max": 388
+      },
+      "agpr_count": {
+        "min": 132,
+        "max": 132
+      },
+      "sgpr_count": {
+        "min": 96,
+        "max": 96
+      },
+      "group_segment_fixed_size": {
+        "min": 37264,
+        "max": 37264
+      },
+      "private_segment_fixed_size": {
+        "min": 0,
+        "max": 0
+      },
+      "vgpr_spill_count": {
+        "min": 3,
+        "max": 3
+      },
+      "sgpr_spill_count": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "kernel": "megamoe_small_stage1_t32x128x256_w4_gm1_dcu64_pw1ma0sw1aa0_tr1wpe2_bnt3_fused256_256_4096_256_decode4102",
+      "artifacts": 8,
+      "vgpr_count": {
+        "min": 388,
+        "max": 388
+      },
+      "agpr_count": {
+        "min": 132,
+        "max": 132
+      },
+      "sgpr_count": {
+        "min": 96,
+        "max": 96
+      },
+      "group_segment_fixed_size": {
+        "min": 37264,
+        "max": 37264
+      },
+      "private_segment_fixed_size": {
+        "min": 0,
+        "max": 0
+      },
+      "vgpr_spill_count": {
+        "min": 3,
+        "max": 3
+      },
+      "sgpr_spill_count": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "kernel": "megamoe_small_stage1_t32x256x256_w4_gm1_dcu64_pw1ma0sw1aa0_tr1wpe1_bnt3_fused128_256_4096_256_decode4102",
+      "artifacts": 8,
+      "vgpr_count": {
+        "min": 476,
+        "max": 476
+      },
+      "agpr_count": {
+        "min": 220,
+        "max": 220
+      },
+      "sgpr_count": {
+        "min": 92,
+        "max": 92
+      },
+      "group_segment_fixed_size": {
+        "min": 29072,
+        "max": 29072
+      },
+      "private_segment_fixed_size": {
+        "min": 0,
+        "max": 0
+      },
+      "vgpr_spill_count": {
+        "min": 0,
+        "max": 2
+      },
+      "sgpr_spill_count": {
+        "min": 0,
+        "max": 0
+      }
+    }
+  ]
+}

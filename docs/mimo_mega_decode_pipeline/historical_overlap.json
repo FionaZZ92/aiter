@@ -1,0 +1,94 @@
+{
+  "provenance": "Historical reuse diagnostic, FlyDSL0.4.2 scalar port; NOT current FlyDSL0.3.2/native_ab_early commit",
+  "source": "/sgl-workspace/megamoev2_test/overlap_analysis/final/summary.json",
+  "definition": "Per-trace unions of phase intervals; intersection duration. Scatter is weighted epilogue + store issue, not XGMI busy time. Medians of intersections, not intersection of medians.",
+  "rows": [
+    {
+      "m": 12,
+      "traces": 24,
+      "gemm1_gemm2_overlap_us": {
+        "median": 128.085,
+        "min": 121.24,
+        "max": 133.77
+      },
+      "gemm2_scatter_overlap_us": {
+        "median": 92.57,
+        "min": 62.77,
+        "max": 107.62
+      },
+      "dispatch_gemm1_overlap_us": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "gemm2_gather_overlap_us": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "traced_event_over_untraced": {
+        "median": 3.1132485143552806,
+        "min": 2.6151930323101307,
+        "max": 4.403995734152412
+      }
+    },
+    {
+      "m": 96,
+      "traces": 24,
+      "gemm1_gemm2_overlap_us": {
+        "median": 73.37,
+        "min": 71.09,
+        "max": 77.48
+      },
+      "gemm2_scatter_overlap_us": {
+        "median": 53.495,
+        "min": 44.11,
+        "max": 68.89
+      },
+      "dispatch_gemm1_overlap_us": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "gemm2_gather_overlap_us": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "traced_event_over_untraced": {
+        "median": 3.6969351332956766,
+        "min": 2.350311738235134,
+        "max": 4.840660952262485
+      }
+    },
+    {
+      "m": 512,
+      "traces": 24,
+      "gemm1_gemm2_overlap_us": {
+        "median": 141.73000000000002,
+        "min": 139.72,
+        "max": 146.11
+      },
+      "gemm2_scatter_overlap_us": {
+        "median": 591.015,
+        "min": 539.17,
+        "max": 674.89
+      },
+      "dispatch_gemm1_overlap_us": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "gemm2_gather_overlap_us": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "traced_event_over_untraced": {
+        "median": 1.5748605936766522,
+        "min": 1.2843147231991243,
+        "max": 2.0613110833414177
+      }
+    }
+  ]
+}

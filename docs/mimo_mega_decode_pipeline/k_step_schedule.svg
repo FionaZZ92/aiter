@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="851.4pt" height="488.837344pt" viewBox="0 0 851.4 488.837344" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 488.837344
+L 851.4 488.837344
+L 851.4 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 174.6 155.927344
+L 286.2 155.927344
+Q 287.595 155.927344 287.595 154.541344
+L 287.595 126.821344
+Q 287.595 125.435344 286.2 125.435344
+L 174.6 125.435344
+Q 173.205 125.435344 173.205 126.821344
+L 173.205 154.541344
+Q 173.205 155.927344 174.6 155.927344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #ffd19a; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 297.36 155.927344
+L 520.56 155.927344
+Q 521.955 155.927344 521.955 154.541344
+L 521.955 126.821344
+Q 521.955 125.435344 520.56 125.435344
+L 297.36 125.435344
+Q 295.965 125.435344 295.965 126.821344
+L 295.965 154.541344
+Q 295.965 155.927344 297.36 155.927344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #ffd19a; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 174.6 197.507344
+L 275.04 197.507344
+Q 276.435 197.507344 276.435 196.121344
+L 276.435 168.401344
+Q 276.435 167.015344 275.04 167.015344
+L 174.6 167.015344
+Q 173.205 167.015344 173.205 168.401344
+L 173.205 196.121344
+Q 173.205 197.507344 174.6 197.507344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #bcebd5; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 565.2 197.507344
+L 732.6 197.507344
+Q 733.995 197.507344 733.995 196.121344
+L 733.995 168.401344
+Q 733.995 167.015344 732.6 167.015344
+L 565.2 167.015344
+Q 563.805 167.015344 563.805 168.401344
+L 563.805 196.121344
+Q 563.805 197.507344 565.2 197.507344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #bcebd5; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 286.2 239.087344
+L 537.3 239.087344
+Q 538.695 239.087344 538.695 237.701344
+L 538.695 209.981344
+Q 538.695 208.595344 537.3 208.595344
+L 286.2 208.595344
+Q 284.805 208.595344 284.805 209.981344
+L 284.805 237.701344
+Q 284.805 239.087344 286.2 239.087344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #c4e0ff; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 565.2 239.087344
+L 732.6 239.087344
+Q 733.995 239.087344 733.995 237.701344
+L 733.995 209.981344
+Q 733.995 208.595344 732.6 208.595344
+L 565.2 208.595344
+Q 563.805 208.595344 563.805 209.981344
+L 563.805 237.701344
+Q 563.805 239.087344 565.2 239.087344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #e3e5e8; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 174.6 366.599344
+L 325.26 366.599344
+Q 326.655 366.599344 326.655 365.213344
+L 326.655 337.493344
+Q 326.655 336.107344 325.26 336.107344
+L 174.6 336.107344
+Q 173.205 336.107344 173.205 337.493344
+L 173.205 365.213344
+Q 173.205 366.599344 174.6 366.599344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #ffd19a; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 358.74 366.599344
+L 498.24 366.599344
+Q 499.635 366.599344 499.635 365.213344
+L 499.635 337.493344
+Q 499.635 336.107344 498.24 336.107344
+L 358.74 336.107344
+Q 357.345 336.107344 357.345 337.493344
+L 357.345 365.213344
+Q 357.345 366.599344 358.74 366.599344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #ffd19a; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 174.6 408.179344
+L 275.04 408.179344
+Q 276.435 408.179344 276.435 406.793344
+L 276.435 379.073344
+Q 276.435 377.687344 275.04 377.687344
+L 174.6 377.687344
+Q 173.205 377.687344 173.205 379.073344
+L 173.205 406.793344
+Q 173.205 408.179344 174.6 408.179344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #bcebd5; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 358.74 408.179344
+L 498.24 408.179344
+Q 499.635 408.179344 499.635 406.793344
+L 499.635 379.073344
+Q 499.635 377.687344 498.24 377.687344
+L 358.74 377.687344
+Q 357.345 377.687344 357.345 379.073344
+L 357.345 406.793344
+Q 357.345 408.179344 358.74 408.179344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #bcebd5; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 286.2 449.759344
+L 537.3 449.759344
+Q 538.695 449.759344 538.695 448.373344
+L 538.695 420.653344
+Q 538.695 419.267344 537.3 419.267344
+L 286.2 419.267344
+Q 284.805 419.267344 284.805 420.653344
+L 284.805 448.373344
+Q 284.805 449.759344 286.2 449.759344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #c4e0ff; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 565.2 449.759344
+L 732.6 449.759344
+Q 733.995 449.759344 733.995 448.373344
+L 733.995 420.653344
+Q 733.995 419.267344 732.6 419.267344
+L 565.2 419.267344
+Q 563.805 419.267344 563.805 420.653344
+L 563.805 448.373344
+Q 563.805 449.759344 565.2 449.759344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #dfcdf7; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start" x="7.2" y="110.189344" transform="rotate(-0 7.2 110.189344)">GEMM1: current k and lookahead k+1</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start" x="7.2" y="143.453344" transform="rotate(-0 7.2 143.453344)">VMEM / prefetch</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start" x="7.2" y="185.033344" transform="rotate(-0 7.2 185.033344)">LDS traffic</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start" x="7.2" y="226.613344" transform="rotate(-0 7.2 226.613344)">MFMA / regs</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start" x="7.2" y="320.861344" transform="rotate(-0 7.2 320.861344)">GEMM2: current k, B k+1, A k+2</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start" x="7.2" y="354.125344" transform="rotate(-0 7.2 354.125344)">VMEM / prefetch</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start" x="7.2" y="395.705344" transform="rotate(-0 7.2 395.705344)">LDS traffic</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start" x="7.2" y="437.285344" transform="rotate(-0 7.2 437.285344)">MFMA / regs</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle" x="230.4" y="143.164781" transform="rotate(-0 230.4 143.164781)">scale(k+1), A(k+1)</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle" x="408.96" y="143.164781" transform="rotate(-0 408.96 143.164781)">B(k+1) per-N loads</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle" x="224.82" y="184.744781" transform="rotate(-0 224.82 184.744781)">A(k) -&gt; regs</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle" x="648.9" y="184.744781" transform="rotate(-0 648.9 184.744781)">A(k+1) -&gt; pong</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle" x="411.75" y="226.324781" transform="rotate(-0 411.75 226.324781)">B(k) decode / MFMA, accumulate C</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle" x="648.9" y="226.324781" transform="rotate(-0 648.9 226.324781)">wait / barrier / rotate</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle" x="249.93" y="353.836781" transform="rotate(-0 249.93 353.836781)">B / scales(k+1)</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle" x="428.49" y="353.836781" transform="rotate(-0 428.49 353.836781)">A(k+2) fetch</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle" x="224.82" y="395.416781" transform="rotate(-0 224.82 395.416781)">barrier, A(k) read</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle" x="428.49" y="395.416781" transform="rotate(-0 428.49 395.416781)">A(k+2) -&gt; free slot</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle" x="411.75" y="436.996781" transform="rotate(-0 411.75 436.996781)">prepared B(k), scale / MFMA</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle" x="648.9" y="436.996781" transform="rotate(-0 648.9 436.996781)">rotate A/B/scale state</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(142.407891 280.82375)">Future loads issued before current compute finishes; store/barrier determines when buffers can rotate.</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(161.486875 293.141344)">Horizontal overlap illustrates scheduling opportunities, not measured VMEM/MFMA concurrency.</text>
+   </g>
+   <g id="text_22">
+    <text style="font-weight: 700; font-size: 17px; font-family: 'DejaVu Sans'; text-anchor: middle" x="425.7" y="20.117344" transform="rotate(-0 425.7 20.117344)">Within one CTA: K-step software scheduling (SCHEMATIC, not a measured trace)</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p7487fdc085">
+   <rect x="7.2" y="38.117344" width="837" height="443.52"/>
+  </clipPath>
+ </defs>
+</svg>

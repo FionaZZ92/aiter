@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="851.4pt" height="488.837344pt" viewBox="0 0 851.4 488.837344" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 488.837344
+L 851.4 488.837344
+L 851.4 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 7.2 167.015344
+L 174.6 167.015344
+Q 175.995 167.015344 175.995 165.629344
+L 175.995 93.557344
+Q 175.995 92.171344 174.6 92.171344
+L 7.2 92.171344
+Q 5.805 92.171344 5.805 93.557344
+L 5.805 165.629344
+Q 5.805 167.015344 7.2 167.015344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #e3e5e8; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 230.4 133.751344
+L 453.6 133.751344
+Q 454.995 133.751344 454.995 132.365344
+L 454.995 76.925344
+Q 454.995 75.539344 453.6 75.539344
+L 230.4 75.539344
+Q 229.005 75.539344 229.005 76.925344
+L 229.005 132.365344
+Q 229.005 133.751344 230.4 133.751344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #bcebd5; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 509.4 133.751344
+L 833.04 133.751344
+Q 834.435 133.751344 834.435 132.365344
+L 834.435 76.925344
+Q 834.435 75.539344 833.04 75.539344
+L 509.4 75.539344
+Q 508.005 75.539344 508.005 76.925344
+L 508.005 132.365344
+Q 508.005 133.751344 509.4 133.751344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #c4e0ff; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 230.4 266.807344
+L 833.04 266.807344
+Q 834.435 266.807344 834.435 265.421344
+L 834.435 187.805344
+Q 834.435 186.419344 833.04 186.419344
+L 230.4 186.419344
+Q 229.005 186.419344 229.005 187.805344
+L 229.005 265.421344
+Q 229.005 266.807344 230.4 266.807344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #c4e0ff; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 7.2 372.143344
+L 241.56 372.143344
+Q 242.955 372.143344 242.955 370.757344
+L 242.955 304.229344
+Q 242.955 302.843344 241.56 302.843344
+L 7.2 302.843344
+Q 5.805 302.843344 5.805 304.229344
+L 5.805 370.757344
+Q 5.805 372.143344 7.2 372.143344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #dfcdf7; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 275.04 372.143344
+L 554.04 372.143344
+Q 555.435 372.143344 555.435 370.757344
+L 555.435 304.229344
+Q 555.435 302.843344 554.04 302.843344
+L 275.04 302.843344
+Q 273.645 302.843344 273.645 304.229344
+L 273.645 370.757344
+Q 273.645 372.143344 275.04 372.143344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #bcebd5; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 587.52 372.143344
+L 833.04 372.143344
+Q 834.435 372.143344 834.435 370.757344
+L 834.435 304.229344
+Q 834.435 302.843344 833.04 302.843344
+L 587.52 302.843344
+Q 586.125 302.843344 586.125 304.229344
+L 586.125 370.757344
+Q 586.125 372.143344 587.52 372.143344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #ffd19a; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(36.045234 120.311062)">GPU global memory</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(29.801875 132.628656)">A1 FP8 + E8M0 scales</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(23.598047 144.94625)">W1 packed FP4 + scales</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(287.418516 101.521859)">LDS: A1 ping / pong</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(291.655234 113.839453)">+ full A1-scale tile</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(579.663047 101.521859)">Register SSA: current A operands</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(581.689453 113.839453)">current / next packed B + scales</text>
+   </g>
+   <g id="patch_9">
+    <path d="M 176.599182 115.733344
+Q 202.499692 115.733344 226.723151 115.733344
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 222.323151 113.533344
+L 226.723151 115.733344
+L 222.323151 117.933344
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle" x="202.5" y="109.080544" transform="rotate(-0 202.5 109.080544)">A staging</text>
+   </g>
+   <g id="patch_10">
+    <path d="M 455.599182 104.645344
+Q 481.499692 104.645344 505.723151 104.645344
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 501.323151 102.445344
+L 505.723151 104.645344
+L 501.323151 106.845344
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle" x="481.5" y="97.992544" transform="rotate(-0 481.5 97.992544)">LDS reads</text>
+   </g>
+   <g id="patch_11">
+    <path d="M 176.593648 165.799125
+Q 369.899158 182.261272 561.533666 198.581114
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 557.336214 196.01569
+L 561.533666 198.581114
+L 556.962856 200.399821
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle" x="369.9" y="175.608544" transform="rotate(-0 369.9 175.608544)">B VMEM directly into register SSA; no B LDS</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(421.432109 217.025125)">Current steady step: call_pipe (N-major)</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(343.714531 229.648656)">A operands loaded upfront; next B[ni] issued before current N group</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(310.548672 241.96625)">prepare_b / MFMA invoked per M fragment; no explicit decoded-B hoist across M</text>
+   </g>
+   <g id="patch_12">
+    <path d="M 648.9 134.365163
+Q 648.9 160.085533 648.9 184.128852
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 651.1 179.728852
+L 648.9 184.128852
+L 646.7 179.728852
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(84.513594 328.211062)">Tail step: call()</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(48.162031 340.528656)">lazy A read, no next B fetch</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(52.5775 352.84625)">no explicit cross-M B hoist</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(336.043828 328.211062)">FP32 C accumulators in regs</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(352.400312 340.528656)">SiLU(gate) * up in regs</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(328.526875 352.84625)">post-SiLU FP32 -&gt; LDS Cshuffle</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(631.172813 328.211062)">Row reads + 32-feature max</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(641.248125 340.528656)">E8 scale + OCP FP8 pack</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(653.768359 352.84625)">A2 / scales -&gt; global</text>
+   </g>
+   <g id="patch_13">
+    <path d="M 243.558501 337.493344
+Q 258.29816 337.493344 271.360769 337.493344
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 266.960769 335.293344
+L 271.360769 337.493344
+L 266.960769 339.693344
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 556.038501 337.493344
+Q 570.77816 337.493344 583.840769 337.493344
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 579.440769 335.293344
+L 583.840769 337.493344
+L 579.440769 339.693344
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 507.550161 266.178128
+Q 461.971833 284.824594 417.945685 302.83605
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 422.851089 303.206197
+L 417.945685 302.83605
+L 421.185044 299.133815
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'" transform="translate(197.218125 435.308344)">K256 x 16 for H4096. A(k+1) fetched into registers during current compute,</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'" transform="translate(138.040313 448.745719)">then written to the alternate LDS slot with a barrier. Cshuffle aliases A storage after its last use.</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'" transform="translate(136.741875 462.183094)">call_pipe_reuse_b / call_pipe_am_final exist, but are NOT selected by current lookahead=1 path.</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 17px; font-family: 'DejaVu Sans'; text-anchor: middle" x="425.7" y="20.117344" transform="rotate(-0 425.7 20.117344)">GEMM1: A ping-pong in LDS; B and operands in register SSA (SCHEMATIC)</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p7487fdc085">
+   <rect x="7.2" y="38.117344" width="837" height="443.52"/>
+  </clipPath>
+ </defs>
+</svg>

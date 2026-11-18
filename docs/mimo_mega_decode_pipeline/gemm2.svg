@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="851.4pt" height="488.837344pt" viewBox="0 0 851.4 488.837344" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 488.837344
+L 851.4 488.837344
+L 851.4 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 7.2 139.295344
+L 258.3 139.295344
+Q 259.695 139.295344 259.695 137.909344
+L 259.695 79.697344
+Q 259.695 78.311344 258.3 78.311344
+L 7.2 78.311344
+Q 5.805 78.311344 5.805 79.697344
+L 5.805 137.909344
+Q 5.805 139.295344 7.2 139.295344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #e3e5e8; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 286.2 139.295344
+L 537.3 139.295344
+Q 538.695 139.295344 538.695 137.909344
+L 538.695 79.697344
+Q 538.695 78.311344 537.3 78.311344
+L 286.2 78.311344
+Q 284.805 78.311344 284.805 79.697344
+L 284.805 137.909344
+Q 284.805 139.295344 286.2 139.295344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #bcebd5; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 565.2 139.295344
+L 816.3 139.295344
+Q 817.695 139.295344 817.695 137.909344
+L 817.695 79.697344
+Q 817.695 78.311344 816.3 78.311344
+L 565.2 78.311344
+Q 563.805 78.311344 563.805 79.697344
+L 563.805 137.909344
+Q 563.805 139.295344 565.2 139.295344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #c4e0ff; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 63 227.999344
+L 788.4 227.999344
+Q 789.795 227.999344 789.795 226.613344
+L 789.795 190.577344
+Q 789.795 189.191344 788.4 189.191344
+L 63 189.191344
+Q 61.605 189.191344 61.605 190.577344
+L 61.605 226.613344
+Q 61.605 227.999344 63 227.999344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #c4e0ff; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 63 280.667344
+L 788.4 280.667344
+Q 789.795 280.667344 789.795 279.281344
+L 789.795 243.245344
+Q 789.795 241.859344 788.4 241.859344
+L 63 241.859344
+Q 61.605 241.859344 61.605 243.245344
+L 61.605 279.281344
+Q 61.605 280.667344 63 280.667344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #bcebd5; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 63 333.335344
+L 788.4 333.335344
+Q 789.795 333.335344 789.795 331.949344
+L 789.795 295.913344
+Q 789.795 294.527344 788.4 294.527344
+L 63 294.527344
+Q 61.605 294.527344 61.605 295.913344
+L 61.605 331.949344
+Q 61.605 333.335344 63 333.335344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #c4e0ff; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 63 386.003344
+L 788.4 386.003344
+Q 789.795 386.003344 789.795 384.617344
+L 789.795 348.581344
+Q 789.795 347.195344 788.4 347.195344
+L 63 347.195344
+Q 61.605 347.195344 61.605 348.581344
+L 61.605 384.617344
+Q 61.605 386.003344 63 386.003344
+z
+" clip-path="url(#p7487fdc085)" style="fill: #dfcdf7; stroke: #536171; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(94.468281 105.679859)">Global A2 FP8</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(96.041797 117.997453)">GPU / XCD L2</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(382.934297 105.679859)">LDS A ring</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(378.891797 117.997453)">slot 0 / 1 / 2</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(655.50875 105.679859)">Register SSA</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'" transform="translate(641.910859 117.997453)">A(k), B(k), B(k+1)</text>
+   </g>
+   <g id="patch_9">
+    <path d="M 260.299182 110.189344
+Q 272.248906 110.189344 282.52158 110.189344
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 278.12158 107.989344
+L 282.52158 110.189344
+L 278.12158 112.389344
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 539.299182 110.189344
+Q 551.248906 110.189344 561.52158 110.189344
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 557.12158 107.989344
+L 561.52158 110.189344
+L 557.12158 112.389344
+" style="fill: none; stroke: #536171; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="425.7" y="160.085344" transform="rotate(-0 425.7 160.085344)">W2 FP4 + B scales: global -&gt; registers directly. A2 scales: global -&gt; register prefetch.</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="425.7" y="211.630656" transform="rotate(-0 425.7 211.630656)">1. Prefetch B(k+1), B-scale(k+1), A2-scale(k+1) -&gt; next register state</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="425.7" y="264.298656" transform="rotate(-0 425.7 264.298656)">2. Barrier; LDS A(k) -&gt; operand regs; VMEM A(k+2) -&gt; regs -&gt; free LDS slot</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="425.7" y="316.813687" transform="rotate(-0 425.7 316.813687)">3. prepare_b(K128) once; reuse across two M16 fragments; native MFMA K32</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="425.7" y="369.634656" transform="rotate(-0 425.7 369.634656)">4. Rotate B/scale SSA state and A ring; next K256 iteration</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'" transform="translate(180.721875 438.080344)">K256 x 8 for I2048. Early per-K32 scaling; s_setprio / sched_barrier around MFMA.</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'" transform="translate(157.015312 451.851469)">Epilogue: FP32 regs -&gt; LDS Cshuffle -&gt; route-weight multiply -&gt; BF16 -&gt; P2P store issue.</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'" transform="translate(135.676875 465.288844)">Sequential instructions are software-interleaved; actual stalls require a current instruction trace.</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 17px; font-family: 'DejaVu Sans'; text-anchor: middle" x="425.7" y="20.117344" transform="rotate(-0 425.7 20.117344)">GEMM2: triple-buffered A in LDS + double-buffered B in registers</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p7487fdc085">
+   <rect x="7.2" y="38.117344" width="837" height="443.52"/>
+  </clipPath>
+ </defs>
+</svg>

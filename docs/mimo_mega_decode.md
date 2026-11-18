@@ -1,5 +1,7 @@
 # MiMo MegaMoEV2 decode review
 
+Detailed kernel pipeline, overlap boundaries, GEMM1/GEMM2 dataflow and resource diagrams: [MiMo decode MegaMoEV2 pipeline](mimo_mega_decode_pipeline.md).
+
 Base SGLang: `2f6aebf22998e5a3193d7c72ffb9a0b69e4f8eaa`.
 Base AITER: `108940c2b0aa6bc767b456f6f4c103046e651aef`.
 Both local branches are `mimo_mega_decode`, with push remotes pointing at FionaZZ92. The paired SGLang/AITER changes use branch `mimo_mega_decode`.
